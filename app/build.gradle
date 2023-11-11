@@ -53,20 +53,21 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 
     // JUnit 5
-    testImplementation(platform("org.junit:junit-bom:$junit5Version"))
-    testImplementation "org.junit.jupiter:junit-jupiter-api"
-    testImplementation "org.junit.jupiter:junit-jupiter-params"
+    implementation(platform("org.junit:junit-bom:$junit5Version"))
+    implementation "org.junit.jupiter:junit-jupiter-api"
+    implementation "org.junit.jupiter:junit-jupiter-params"
     runtimeOnly "org.junit.platform:junit-platform-launcher"
     runtimeOnly "org.junit.jupiter:junit-jupiter-engine"
 
     // Coroutines
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
 
     // Test
     testImplementation "junit:junit:$junitVersion"
     testImplementation "io.mockk:mockk:$mockkVersion"
 
     testImplementation "androidx.core:core-ktx:$androidxCoreVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
 
     testImplementation("org.assertj:assertj-core:$assertJVersion")
 
@@ -82,4 +83,13 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
 
+}
+
+tasks.withType(Test) {
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+
+    // Make JUnit5 Test Configurable
+    useJUnitPlatform()
 }

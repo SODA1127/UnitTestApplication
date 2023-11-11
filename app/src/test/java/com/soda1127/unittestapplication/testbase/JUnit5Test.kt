@@ -2,6 +2,7 @@ package com.soda1127.unittestapplication.testbase
 
 import androidx.annotation.CallSuper
 import androidx.lifecycle.LiveData
+import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.mockkStatic
 import kotlinx.coroutines.Dispatchers
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtendWith
 
+
 @OptIn(ExperimentalCoroutinesApi::class)
 @ExtendWith(InstantExecutorExtension::class)
 abstract class JUnit5Test {
@@ -21,6 +23,7 @@ abstract class JUnit5Test {
     @CallSuper
     @BeforeEach
     open fun setup() {
+        MockKAnnotations.init(this)
         mockkStatic(Dispatchers::class)
         Dispatchers.setMain(UnconfinedTestDispatcher())
         every { Dispatchers.IO } returns UnconfinedTestDispatcher()
