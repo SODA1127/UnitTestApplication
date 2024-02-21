@@ -27,8 +27,8 @@ class LiveDataTestObserver<T> : Observer<T> {
             val expected: T = expectedIterator.next()
 
             if (verbose) {
-                println("[#$index   ACTUAL] $actual")
-                println("[#$index EXPECTED] $expected")
+                println("[#$index   ACTUAL] $actual | ${actual.toString()}")
+                println("[#$index EXPECTED] $expected | ${expected.toString()}")
             }
 
             if (!ObjectHelper.equals(actual, expected)) {
